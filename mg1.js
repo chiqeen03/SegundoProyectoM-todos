@@ -1,13 +1,13 @@
-function mmg(llegadas, servicios, _sigma){
-    mmg(llegadas, servicios, 1, _sigma);
+function mmg(llegadas, servicios){
+    mmg(llegadas, servicios, 1);
 }
 
-function mmg(llegadas, servicios, servidores, _sigma){
+function mmg(llegadas, servicios, servidores){
     let tasaLlegadas = llegadas;
     let tasaServicios = servicios;
     let s = servidores;
     // checar esto, no se si se recibe en el argumento
-    let sigma = _sigma;
+    let sigma = 1/tasaServicios;
 
     let p0;
     let p;
