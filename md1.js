@@ -1,13 +1,7 @@
-function mmg(llegadas, servicios, _sigma){
-    mmg(llegadas, servicios, 1, _sigma);
-}
-
-function mmg(llegadas, servicios, servidores, _sigma){
+function md1(llegadas, servicios, servidores){
     let tasaLlegadas = llegadas;
     let tasaServicios = servicios;
     let s = servidores;
-    // checar esto, no se si se recibe en el argumento
-    let sigma = _sigma;
 
     let p0;
     let p;
@@ -23,7 +17,7 @@ function mmg(llegadas, servicios, servidores, _sigma){
     p0 = 1-p;
 
     // Lq
-    Lq = ((Math.pow(tasaLlegadas, 2) * Math.pow(sigma, 2)) + Math.pow(p, 2))/(2*(1-p));
+    Lq = Math.pow(p, 2)/(2*(1-p));
 
     // L
     L = p + Lq;
