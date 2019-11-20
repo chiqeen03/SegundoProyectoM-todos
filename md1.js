@@ -3,18 +3,21 @@ function md1(llegadas, servicios, servidores){
     let tasaServicios = servicios;
     let s = servidores;
 
-    let p0;
+    let Pn;
+    let P0;
     let p;
     let Lq;
     let L;
     let Wq;
     let W;
 
+    let n;
+
     // p
     p = tasaLlegadas/(tasaServicios * s);
 
     // P0
-    p0 = 1-p;
+    P0 = 1-p;
 
     // Lq
     Lq = Math.pow(p, 2)/(2*(1-p));
@@ -27,4 +30,7 @@ function md1(llegadas, servicios, servidores){
 
     // W
     W = Wq + (1/tasaServicios);
+
+    // Pn
+    Pn = Math.pow(p, n) * P0;
 }
