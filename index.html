@@ -248,7 +248,8 @@
       // sigma cuadrada
       var sigmaCuadradaMGS = parseFloat(document.getElementById('sigmaCuadradaMGS').value);
       // servidoresMGS
-      var servidoresMGS = parseFloat(document.getElementById('servidoresMGS').value);
+      //var servidoresMGS = parseFloat(document.getElementById('servidoresMGS').value);
+      var servidoresMGS = 1;
 
 
       if (llegadasMGS >= 0 && llegadasMGS - Math.floor(llegadasMGS) == 0
@@ -522,7 +523,7 @@
               <!-- Custom Text Color Utilities -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">MGS</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">MG1</h6>
                 </div>
                 <div class="card-body px-3 py-5 bg-gradient-warning text-white">
                   <p>Lambda (Clientes por hora):</p>
@@ -531,8 +532,7 @@
                   <input type="text" id="serviciosMGS" /><br /><br />
                   <p>Sigma Cuadrada:</p>
                   <input type="text" id="sigmaCuadradaMGS" /><br /><br />
-                  <p>Servidores:</p>
-                  <input type="text" id="servidoresMGS" /><br /><br />
+                  
                   <button onclick="mmg();">Calcular</button>
 
                   <p>P0:</p>
