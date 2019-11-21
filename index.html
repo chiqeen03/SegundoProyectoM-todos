@@ -293,7 +293,8 @@
     function md1(llegadas, servicios, servidores) {
       var llegadasMD1 = parseFloat(document.getElementById('llegadasMD1').value);
       var serviciosMD1 = parseFloat(document.getElementById('serviciosMD1').value);
-      var servidoresMD1 = parseFloat(document.getElementById('servidoresMD1').value);
+      //var servidoresMD1 = parseFloat(document.getElementById('servidoresMD1').value);
+      var servidoresMD1 = 1;
 
       if (llegadasMD1 >= 0 && llegadasMD1 - Math.floor(llegadasMD1) == 0
         && servidoresMD1 >= 0 && servidoresMD1 - Math.floor(servidoresMD1) == 0
@@ -565,8 +566,7 @@
                   <input type="text" id="llegadasMD1" /><br /><br />
                   <p>&micro; (Servicio por hora):</p>
                   <input type="text" id="serviciosMD1" /><br /><br />
-                  <p>Servidores:</p>
-                  <input type="text" id="servidoresMD1" /><br /><br />
+                  
                   <button onclick="md1();">Calcular</button>
 
                   <p>P0:</p>
