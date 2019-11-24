@@ -114,19 +114,22 @@
         if (j >= s) {
           sumaPnMMS[j] = (Math.pow(tL / tS, n) / ((factorize(n))) * p0);
           sumadeesto += sumaPnMMS[j];
-          console.log("Valor: " + sumaPnMMS[j]);
+          //console.log("Valor: " + sumaPnMMS[j]);
         } else {
           sumaPnMMS[j] = (Math.pow(tL / tS, n) / (factorize(s) * (Math.pow(s, n - s)))) * p0;
           sumadeesto += sumaPnMMS[j];
-          console.log("Valor: " + sumaPnMMS[j]);
+          //console.log("Valor: " + sumaPnMMS[j]);
         }
-        console.log(sumadeesto);
-        promedioCliente = 1 - (sumadeesto);
-        console.log(promedioCliente);
-        return promedioCliente;
+        
       }
 
-
+      for (var i = 0; i < n; i++){
+        console.log("Valor " + i + ": " + sumaPnMMS[i]);
+      }
+      console.log("suma: " + sumadeesto);
+      promedioCliente = 1 - (sumadeesto);
+      console.log("promedio: " + promedioCliente);
+      return promedioCliente;
     }
 
 
