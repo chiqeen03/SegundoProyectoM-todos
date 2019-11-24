@@ -23,98 +23,77 @@
     function mm1(llegadasMM1, serviciosMM1) {
       var llegadasMM1 = parseFloat(document.getElementById('llegadasMM1').value);
       var serviciosMM1 = parseFloat(document.getElementById('serviciosMM1').value);
+      var PnMM1 = parseFloat(document.getElementById('PnMM1').value);
+
       console.log(llegadasMM1);
       console.log(serviciosMM1);
-
       if (llegadasMM1 >= 0 && serviciosMM1 >= 0 && llegadasMM1 - Math.floor(llegadasMM1) == 0 && serviciosMM1 - Math.floor(serviciosMM1) == 0) {
         //var llegadasMM1 = parseFloat(document.getElementById('llegadasMM1').value);
         //var serviciosMM1 = parseFloat(document.getElementById('serviciosMM1').value);
-
-        var factorUtilizaMM1 = document.getElementById('factorUtilizaMM1').value = llegadasMM1 / serviciosMM1;
-        var clientesColaMM1 = document.getElementById('clientesColaMM1').value = (Math.pow(llegadasMM1, 2)) / serviciosMM1 * (serviciosMM1 - llegadasMM1);
-        var promedioClientesMM1 = document.getElementById('promedioClientesMM1').value = llegadasMM1 / (serviciosMM1 - llegadasMM1);
-        var tiempoColaMM1 = document.getElementById('tiempoColaMM1').value = clientesColaMM1 / llegadasMM1;
+        var factorUtilizaMM1 = document.getElementById('factorUtilizaMM1').value = llegadasMM1 / serviciosMM1; // p
+        var clientesColaMM1 = document.getElementById('clientesColaMM1').value = (Math.pow(llegadasMM1, 2)) / serviciosMM1 * (serviciosMM1 - llegadasMM1); // Lq
+        var promedioClientesMM1 = document.getElementById('promedioClientesMM1').value = llegadasMM1 / (serviciosMM1 - llegadasMM1); // L
+        var tiempoColaMM1 = document.getElementById('tiempoColaMM1').value = clientesColaMM1 / llegadasMM1; // 
         var promedioSistemaMM1 = document.getElementById('promedioSistemaMM1').value = promedioClientesMM1 / llegadasMM1;
+        var P0MM1 = 1 - factorUtilizaMM1;
+        // Método que me pasó andrés:
+        /*
+        function Pn(n, p, p0) {
+          return (Math.pow(p, n)) * p0;
+        }
+        */
+        // Usaré este que hice alch :v
+        var PnTotalMM1 = document.getElementById('PnTotalMM1').value = P0MM1 * (Math.pow(P0MM1, PnMM1));
+
+
+
       }
       else {
         alert("Sólo puedes poner números enteros positivos");
       }
-
     }
-
-
     function mms() {
       var llegadasMMS = parseFloat(document.getElementById('llegadasMMS').value);
       var serviciosMMS = parseFloat(document.getElementById('serviciosMMS').value);
       var servidoresMMS = parseFloat(document.getElementById('servidoresMMS').value);
       var nClientesMMS = parseFloat(document.getElementById('nClientesMMS').value);
-
       if (llegadasMMS >= 0 && serviciosMMS >= 0 && llegadasMMS - Math.floor(llegadasMMS) == 0 && serviciosMMS - Math.floor(serviciosMMS) == 0,
         servidoresMMS >= 0 && nClientesMMS >= 0 && servidoresMMS - Math.floor(servidoresMMS) == 0 && nClientesMMS - Math.floor(nClientesMMS) == 0
       ) {
-
-
         var nMMS;
-
         //P0
         var sum = 0;
         var temp = 0;
-
         for (i = 0; i < servidoresMMS; i++) {
           sum += Math.pow(llegadasMMS / serviciosMMS, i) / factorize(i);
         }
-
         temp = Math.pow(llegadasMMS / serviciosMMS, servidoresMMS) / factorize(servidoresMMS);
-
         var temp2 = temp * (1 / (1 - (llegadasMMS / (servidoresMMS * serviciosMMS))));
-
         var total = temp2 + sum;
-
         var p0MMS = document.getElementById('p0MMS').value = 1 / total;
         console.log("P0: " + p0MMS);
-
         //P
         var justPMMS = document.getElementById('justPMMS').value = llegadasMMS / (servidoresMMS * serviciosMMS);
         console.log("P: " + justPMMS);
-
         //LqMMS
         var LqMMS = document.getElementById('LqMMS').value = (p0MMS * (Math.pow(llegadasMMS / serviciosMMS, servidoresMMS)) * justPMMS) / (factorize(servidoresMMS) * (Math.pow(1 - justPMMS, 2)));
         console.log("LqMMS: " + LqMMS);
-
         //LMMS
-        LMMS = document.getElementById('LMMS').value = LqMMS + (llegadasMMS / serviciosMMS);
+        var LMMS = document.getElementById('LMMS').value = LqMMS + (llegadasMMS / serviciosMMS);
         console.log("LMMS: " + LMMS);
-
         //WqMMS
-        WqMMS = document.getElementById('WqMMS').value = LqMMS / llegadasMMS;
+        var WqMMS = document.getElementById('WqMMS').value = LqMMS / llegadasMMS;
         console.log("WqMMS: " + WqMMS);
-
         //WMMS
-        WMMS = document.getElementById('WMMS').value = WqMMS + (1 / serviciosMMS);
+        var WMMS = document.getElementById('WMMS').value = WqMMS + (1 / serviciosMMS);
         console.log("WMMS: " + WMMS);
-
-        //PMClientes
-        var PMClientesSuma = 0;
-        for (i = 0; i < nClientesMMS; i++) {
-          if (i => servidoresMMS) {
-            PMClientesSuma += (Math.pow(llegadasMMS / serviciosMMS, i) / factorize(i)) * p0MMS;
-          }
-          else {
-            PMClientesSuma += (Math.pow(llegadasMMS / serviciosMMS, i) / factorize(servidoresMMS) * Math.pow(servidoresMMS,i-servidoresMMS)) * p0MMS;
-          }
-
-        }
-        var totalPMClientes = PMClientesSuma
-        PMClientesPMMS = document.getElementById('PMClientesPMMS').value = totalPMClientes;
-        console.log("PMClientes: " + totalPMClientes);
-
+        //PMClientes                                                               function PnMMS(n, s, tL, tS, p0) {
+        var totalPMMSClientes = document.getElementById('totalPMMSClientes').value = PnMMS(nClientesMMS, servidoresMMS, llegadasMMS, serviciosMMS, p0MMS);
 
       } else {
         alert("Sólo se pueden poner números enteros positivos")
       }
-
     }
-
     function Cn(n0, nf, comp, servidoresMMS) {
       var nMMS = n0;
       var factorProcesoMMS;
@@ -126,14 +105,29 @@
       }
     }
 
-    function Pn() {
-      var promedioCliente;
-      if (nMMS >= servidoresMMS) {
-        promedioCliente = Math.pow(llegadasMMS / serviciosMMS, nMMS) / (factorize(nMMS));
-      } else {
+    function PnMMS(n, s, tL, tS, p0) {
+      var sumaPnMMS = [];
+      sumaPnMMS[0] = p0;
+      var promedioCliente = 0;
+      for (var j = 0; j < n; j++) {
+        if (j >= s) {
+          sumaPnMMS[j] = (Math.pow(tL / tS, n) / ((factorize(n))) * p0);
+          console.log("Valor: " + sumaPnMMS[j]);
+        } else {
+          sumaPnMMS[j] = (Math.pow(tL / tS, n) / (factorize(s) * (Math.pow(s, n - s)))) * p0;
+          console.log("Valor: " + sumaPnMMS[j]);
+        }
 
       }
+      console.log(sumaPnMMS);
+      promedioCliente = 1 - (sumaPnMMS);
+      console.log(promedioCliente);
+      return promedioCliente;
+
+
+
     }
+
 
     function factorize(numMMS) {
       var resultMMS = numMMS;
@@ -145,8 +139,6 @@
       }
       return resultMMS;
     }
-
-
     function mmsk() {
       var llegadas = parseFloat(document.getElementById('llegadas').value);
       var servicios = parseFloat(document.getElementById('servicios').value);
@@ -155,60 +147,36 @@
       if (llegadas >= 0 && servicios >= 0 && llegadas - Math.floor(llegadas) == 0 && servicios - Math.floor(servicios) == 0
         && servidores >= 0 && k >= 0 && servidores - Math.floor(servidores) == 0 && k - Math.floor(k) == 0
       ) {
-
         var sum = 0;
         var sum2 = 0;
         var temp = 0;
         var temp2 = 0;
-
         var justP = document.getElementById('justP').value = llegadas / (servidores * servicios);
-
         for (i = 0; i <= servidores; i++) {
           sum += Math.pow(llegadas / servicios, i) / factorize(i);
         }
-
         temp = Math.pow(llegadas / servicios, servidores) / factorize(servidores);
-
         for (j = servidores + 1; j <= k; j++) {
           sum2 += Math.pow(justP, j - servidores);
         }
-
         temp2 = sum + temp * sum2;
-
         var p0 = document.getElementById('p0').value = 1 / temp2;
-
         console.log("P0: " + p0);
-
         LqTemp1 = p0 * Math.pow(llegadas / servicios, servidores) * justP / (factorize(servidores) * (Math.pow(1 - justP, 2)));
-
         LqTemp2 = 1 - Math.pow(justP, k - servidores) - ((k - servidores) * Math.pow(justP, k - servidores)) * (1 - justP);
-
         var Lq = document.getElementById('Lq').value = LqTemp1 * LqTemp2;
-
         console.log("Lq: " + Lq);
-
         var pk = document.getElementById('pk').value = PnMMSK(k, servidores, k, llegadas, servicios, p0);
-
         console.log("Pk: " + pk);
-
         var Le = document.getElementById('Le').value = llegadas * (1 - pk);
-
         console.log("Le: " + Le);
-
         var wq = document.getElementById('wq').value = Lq / Le;
-
         console.log("Wq: " + wq);
-
         var W = document.getElementById('W').value = wq + (1 / servicios);
-
         console.log("W: " + W);
-
         var L = document.getElementById('L').value = Le * W;
-
         console.log("L: " + L);
-
         var ca = document.getElementById('ca').value = 1 - p0;
-
         console.log("Clientes atendidos: " + ca);
       }
       else {
@@ -217,7 +185,6 @@
     }
 
     function PnMMSK(n, servidores, k, tL, tS, p0) {
-
       if (n <= servidores) {
         return (Math.pow(tL / tS, n) / factorizeMMSK(n)) * p0;
       } else if (n > servidores && n <= k) {
@@ -226,6 +193,8 @@
         return 0;
       }
     }
+
+
 
     function factorizeMMSK(num) {
       var result = num;
@@ -237,9 +206,6 @@
       }
       return result;
     }
-
-
-
     function mmg() {
       // lambda
       var llegadasMGS = parseFloat(document.getElementById('llegadasMGS').value);
@@ -250,17 +216,13 @@
       // servidoresMGS
       //var servidoresMGS = parseFloat(document.getElementById('servidoresMGS').value);
       var servidoresMGS = 1;
-
+      var nMGS = parseFloat(document.getElementById('nMGS').value);
 
       if (llegadasMGS >= 0 && llegadasMGS - Math.floor(llegadasMGS) == 0
         && servidoresMGS >= 0 && servidoresMGS - Math.floor(servidoresMGS) == 0
         && serviciosMGS >= 0 && serviciosMGS - Math.floor(serviciosMGS) == 0
         && sigmaCuadradaMGS >= 0 && sigmaCuadradaMGS - Math.floor(sigmaCuadradaMGS) == 0
       ) {
-
-
-        var nMGS = 0;
-
         // justPMGS
         var justPMGS = document.getElementById('justPMGS').value = llegadasMGS / (serviciosMGS * servidoresMGS);
         console.log("P0: " + justPMGS);
@@ -286,43 +248,29 @@
       else {
         alert("Sólo se pueden números positivos enteros")
       }
-
     }
-
-
     function md1(llegadas, servicios, servidores) {
       var llegadasMD1 = parseFloat(document.getElementById('llegadasMD1').value);
       var serviciosMD1 = parseFloat(document.getElementById('serviciosMD1').value);
+      var nMD1 = parseFloat(document.getElementById('nMD1').value);
       //var servidoresMD1 = parseFloat(document.getElementById('servidoresMD1').value);
       var servidoresMD1 = 1;
-
       if (llegadasMD1 >= 0 && llegadasMD1 - Math.floor(llegadasMD1) == 0
         && servidoresMD1 >= 0 && servidoresMD1 - Math.floor(servidoresMD1) == 0
         && serviciosMD1 >= 0 && serviciosMD1 - Math.floor(serviciosMD1) == 0
       ) {
-
-
-
-        var nMD1 = 0;
-
         // justPMD1
         var justPMD1 = document.getElementById('justPMD1').value = llegadasMD1 / (serviciosMD1 * servidoresMD1);
-
         // P0MD1
         var P0MD1 = document.getElementById('P0MD1').value = 1 - justPMD1;
-
         // LqPMD1
         var LqPMD1 = document.getElementById('LqPMD1').value = Math.pow(justPMD1, 2) / (2 * (1 - justPMD1));
-
         // LPMD1
         var LPMD1 = document.getElementById('LPMD1').value = justPMD1 + LqPMD1;
-
         // WqMD1
         var WqMD1 = document.getElementById('WqMD1').value = LqPMD1 / llegadasMD1;
-
         // WMD1
         var WMD1 = document.getElementById('WMD1').value = WqMD1 + (1 / serviciosMD1);
-
         // PnMD1
         var PnMD1 = document.getElementById('PnMD1').value = Math.pow(justPMD1, nMD1) * P0MD1;
       }
@@ -330,7 +278,6 @@
         alert("Sólo se pueden números enteros positivos")
       }
     }
-
     function meks() {
       // lambda
       var llegadasMEKS = parseFloat(document.getElementById('llegadasMEKS').value);
@@ -340,33 +287,24 @@
       var sMEKS = parseFloat(document.getElementById('servidoresMEKS').value);
       // justKMEKS
       var justKMEKS = parseFloat(document.getElementById('justKMEKS').value);
-
+      var nMEKS = parseFloat(document.getElementById('nMEKS').value);
       if (llegadasMEKS >= 0 && llegadasMEKS - Math.floor(llegadasMEKS) == 0
         && sMEKS >= 0 && sMEKS - Math.floor(sMEKS) == 0
         && serviciosMEKS >= 0 && serviciosMEKS - Math.floor(serviciosMEKS) == 0
         && justKMEKS >= 0 && justKMEKS - Math.floor(justKMEKS) == 0
       ) {
-
-        var nMEKS = 0;
-
         // justPMEKS
         var justPMEKS = document.getElementById('justPMEKS').value = llegadasMEKS / (serviciosMEKS * sMEKS);
-
         // P0MEKS
         var P0MEKS = document.getElementById('P0MEKS').value = 1 - justPMEKS;
-
         // LqMEKS
         var LqMEKS = document.getElementById('LqMEKS').value = ((1 + justKMEKS) / (2 * justKMEKS)) * ((Math.pow(llegadasMEKS, 2)) / (serviciosMEKS * (serviciosMEKS - llegadasMEKS)));
-
         // WqMEKS
         var WqMEKS = document.getElementById('WqMEKS').value = LqMEKS / llegadasMEKS;
-
         // WMEKS
         var WMEKS = document.getElementById('WMEKS').value = WqMEKS + (1 / serviciosMEKS);
-
         // LMEKS
         var LMEKS = document.getElementById('LMEKS').value = llegadasMEKS * WMEKS;
-
         // PnMEKS
         var PnMEKS = document.getElementById('PnMEKS').value = Math.pow(justPMEKS, nMEKS) * P0MEKS;
       }
@@ -424,9 +362,13 @@
                   <input type="text" id="llegadasMM1" /><br /><br />
                   <p>&micro; (Servicio por hora):</p>
                   <input type="text" id="serviciosMM1" /><br /><br />
+                  <p>Pn:</p>
+                  <input type="text" id="PnMM1" /><br /><br />
                   <button onclick="mm1();">Calcular</button>
                   <p>P:</p>
                   <input type="text" id="factorUtilizaMM1" />
+                  <p>Pn:</p>
+                  <input type="text" id="PnTotalMM1" />
                   <p>Lq:</p>
                   <input type="text" id="clientesColaMM1" />
                   <p>L:</p>
@@ -455,14 +397,14 @@
                   <input type="text" id="serviciosMMS" /><br /><br />
                   <p>Servidores:</p>
                   <input type="text" id="servidoresMMS" /><br /><br />
-                  <p>Probabilidad de que haya más de N clientes en el sistema:</p>
+                  <p>Pn:</p>
                   <input type="text" id="nClientesMMS" /><br /><br />
                   <button onclick="mms();">Calcular</button>
 
                   <p>P0:</p>
                   <input type="text" id="p0MMS" />
-                  <p>Probabilidad de que haya más de N clientes en el sistema:</p>
-                  <input type="text" id="PMClientesPMMS" />
+                  <p>Pn:</p>
+                  <input type="text" id="totalPMMSClientes" />
                   <p>P:</p>
                   <input type="text" id="justPMMS" />
                   <p>Lq:</p>
@@ -484,7 +426,7 @@
               <!-- Custom Text Color Utilities -->
               <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                  <h6 class="m-0 font-weight-bold text-primary">MMKS</h6>
+                  <h6 class="m-0 font-weight-bold text-primary">MMSK</h6>
                 </div>
                 <div class="card-body px-3 py-5 bg-gradient-info text-white">
                   <p>Lambda (Clientes por hora):</p>
@@ -493,7 +435,7 @@
                   <input type="text" id="servicios" /><br /><br />
                   <p>Servidores:</p>
                   <input type="text" id="servidores" /><br /><br />
-                  <p>K:</p>
+                  <p>K (Pn):</p>
                   <input type="text" id="k" /><br /><br />
                   <button onclick="mmsk();">Calcular</button>
 
@@ -505,7 +447,7 @@
                   <input type="text" id="Lq" />
                   <p>Lambda-e:</p>
                   <input type="text" id="Le" />
-                  <p>pk:</p>
+                  <p>pk (Pn):</p>
                   <input type="text" id="pk" />
                   <p>wq:</p>
                   <input type="text" id="wq" />
@@ -533,7 +475,8 @@
                   <input type="text" id="serviciosMGS" /><br /><br />
                   <p>Sigma Cuadrada:</p>
                   <input type="text" id="sigmaCuadradaMGS" /><br /><br />
-                  
+                  <p>Pn:</p>
+                  <input type="text" id="nMGS" /><br /><br />
                   <button onclick="mmg();">Calcular</button>
 
                   <p>P0:</p>
@@ -566,7 +509,8 @@
                   <input type="text" id="llegadasMD1" /><br /><br />
                   <p>&micro; (Servicio por hora):</p>
                   <input type="text" id="serviciosMD1" /><br /><br />
-                  
+                  <p>Pn:</p>
+                  <input type="text" id="nMD1" /><br /><br />
                   <button onclick="md1();">Calcular</button>
 
                   <p>P0:</p>
@@ -603,6 +547,8 @@
                   <input type="text" id="servidoresMEKS" /><br /><br />
                   <p>Clientes (k):</p>
                   <input type="text" id="justKMEKS" /><br /><br />
+                  <p>Pn:</p>
+                  <input type="text" id="nMEKS" /><br /><br />
                   <button onclick="meks();">Calcular</button>
 
                   <p>P0:</p>
