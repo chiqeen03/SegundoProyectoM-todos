@@ -111,19 +111,19 @@
       var promedioCliente = 0;
       var sumadeesto = sumaPnMMS[0];
       for (var j = 1; j <= n; j++) {
-        if (j >= s) {
-          sumaPnMMS[j] = (Math.pow(tL / tS, n) / ((factorize(n))) * p0);
+        if (j <= s) {
+          sumaPnMMS[j] = (Math.pow(tL / tS, j) / ((factorize(j)))) * p0;
           sumadeesto += sumaPnMMS[j];
           //console.log("Valor: " + sumaPnMMS[j]);
         } else {
-          sumaPnMMS[j] = (Math.pow(tL / tS, n) / (factorize(s) * (Math.pow(s, n - s)))) * p0;
+          sumaPnMMS[j] = ((Math.pow(tL / tS, j) / (factorize(s) * (Math.pow(s, j - s))))) * p0;
           sumadeesto += sumaPnMMS[j];
           //console.log("Valor: " + sumaPnMMS[j]);
         }
-        
-      }
 
-      for (var i = 0; i < n; i++){
+      }
+      console.log("Valor 0: " + sumaPnMMS[0])
+      for (var i = 1; i < n; i++) {
         console.log("Valor " + i + ": " + sumaPnMMS[i]);
       }
       console.log("suma: " + sumadeesto);
